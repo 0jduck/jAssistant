@@ -2,11 +2,12 @@
 
 # ---- file setup ----
 # imports
-from datetime import datetime
 from sys import argv
+
+from prompt import makePrompt
 from api import (
     makeChat,
-    prompt
+    sendPrompt
 )
 
 # variables
@@ -21,12 +22,6 @@ def debug(*args):
         for arg in args:
             print(repr(arg))
 
-# ---- make input ----
-def makePrompt(prompt: str) -> str:
-    time = str(datetime.now()).split('.')[0]
-    promptNew = f'[Time: {time}]User: {prompt}'
-    return promptNew
-
 # ---- run file ----
 if __name__ == '__main__':
     chat = []
@@ -39,7 +34,7 @@ if __name__ == '__main__':
                 userPrompt = makePrompt(prompt=userInput)
                 chat = makeChat(role='user', content=userPrompt, chat=chat)
                 debug(chat)
-                reply = prompt(chat=chat)
+                reply = sendPrompt(chat=chat)
                 chat = makeChat(role='assistant', content=reply, chat=chat)
     except KeyboardInterrupt:
         pass

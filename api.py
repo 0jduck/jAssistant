@@ -9,7 +9,7 @@ import json
 from data import runtime
 
 # ---- prompt ----
-def prompt(chat: list, api: dict = runtime.apiConfig) -> str:
+def sendPrompt(chat: list, api: dict = runtime.apiConfig) -> str:
     # validate data
     for key in api.keys():
         if api[key] == '':
